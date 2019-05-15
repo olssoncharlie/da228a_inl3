@@ -15,6 +15,10 @@ class CreateHerbsTable extends Migration
     {
         Schema::create('herbs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->text('name');
+            $table->integer('price');
+            $table->text('image');
+            $table->text('description');
             $table->timestamps();
         });
     }

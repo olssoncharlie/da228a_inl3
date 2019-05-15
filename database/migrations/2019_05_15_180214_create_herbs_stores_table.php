@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStoresTable extends Migration
+class CreateHerbsStoresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateStoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('stores', function (Blueprint $table) {
+        Schema::create('herbs_stores', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('name');
-            $table->text('address');
+            $table->unsignedBigInteger('store_id')->nullable();
+            $table->unsignedBigInteger('herb_id')->nullable();
+            $table->foreign('product_id')->references('id')->on('herbs');
+            $table->foreign('store_id')->references('id')->on('stores');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateStoresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stores');
+        Schema::dropIfExists('herbs_stores');
     }
 }
