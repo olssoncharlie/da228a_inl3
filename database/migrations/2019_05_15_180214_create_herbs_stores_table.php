@@ -17,7 +17,7 @@ class CreateHerbsStoresTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('store_id')->nullable();
             $table->unsignedBigInteger('herb_id')->nullable();
-            $table->foreign('product_id')->references('id')->on('herbs');
+            $table->foreign('herb_id')->references('id')->on('herbs');
             $table->foreign('store_id')->references('id')->on('stores');
             $table->timestamps();
         });
