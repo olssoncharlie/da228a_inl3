@@ -14,7 +14,7 @@ class StoresController extends Controller
      */
     public function index()
     {
-        //
+        return view("stores.index");
     }
 
     /**
@@ -24,7 +24,7 @@ class StoresController extends Controller
      */
     public function create()
     {
-        //
+        return view("stores.create");
     }
 
     /**
@@ -46,7 +46,7 @@ class StoresController extends Controller
      */
     public function show($id)
     {
-        //
+        return view("stores.show");
     }
 
     /**
@@ -57,7 +57,7 @@ class StoresController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view("stores.edit");
     }
 
     /**

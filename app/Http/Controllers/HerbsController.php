@@ -14,7 +14,7 @@ class HerbsController extends Controller
      */
     public function index()
     {
-        //
+        return view("herbs.index");
     }
 
     /**
@@ -24,7 +24,7 @@ class HerbsController extends Controller
      */
     public function create()
     {
-        //
+        return view("herbs.create");
     }
 
     /**
@@ -46,7 +46,7 @@ class HerbsController extends Controller
      */
     public function show($id)
     {
-        //
+        return view("herbs.show");
     }
 
     /**
@@ -57,7 +57,7 @@ class HerbsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view("herbs.edit");
     }
 
     /**

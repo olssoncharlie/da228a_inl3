@@ -14,7 +14,7 @@ class ReviewsController extends Controller
      */
     public function index()
     {
-        //
+        return view("reviews.index");
     }
 
     /**
@@ -24,7 +24,7 @@ class ReviewsController extends Controller
      */
     public function create()
     {
-        //
+        return view("reviews.create");
     }
 
     /**
@@ -46,7 +46,7 @@ class ReviewsController extends Controller
      */
     public function show($id)
     {
-        //
+        return view("reviews.show");
     }
 
     /**
@@ -57,7 +57,7 @@ class ReviewsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view("reviews.edit");
     }
 
     /**
