@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+# TESTAR FÖR ATT SE SÅ HEADER OCH FOOTER FUNGERAR
+Route::get('/test', function () {
+    return view('test', [
+        "title" => "TESTAR"
+    ]);
+});
