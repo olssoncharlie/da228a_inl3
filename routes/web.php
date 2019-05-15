@@ -21,3 +21,7 @@ Route::get('/test', function () {
         "title" => "TESTAR"
     ]);
 });
+
+Route::resource('/herbs', 'HerbsController');
+Route::resource('/stores', 'StoresController');
+Route::resource('/reviews', 'ReviewsController');
