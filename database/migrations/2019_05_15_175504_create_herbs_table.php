@@ -17,6 +17,7 @@ class CreateHerbsTable extends Migration
             $table->bigIncrements('id');
             $table->text('name');
             $table->integer('price');
+            $table->integer('amount');
             $table->text('image');
             $table->text('description');
             $table->timestamps();
