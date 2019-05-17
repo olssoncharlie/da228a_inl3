@@ -15,6 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(HerbsTableSeed::class);
         $this->call(StoresTableSeed::class);
         $this->call(ReviewsTableSeed::class);
-        $this->call(HerbsStoresTableSeed::class);
+        $this->call(HerbStoreTableSeed::class);
     }
 }
