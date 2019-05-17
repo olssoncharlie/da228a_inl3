@@ -13,7 +13,7 @@ class CreateHerbsStoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('herbs_stores', function (Blueprint $table) {
+        Schema::create('herb_store', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('store_id')->nullable();
             $table->unsignedBigInteger('herb_id')->nullable();

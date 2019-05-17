@@ -11,7 +11,7 @@ class HerbsStoresTableSeed extends Seeder
      */
     public function run()
     {
-        DB::table('herbs_stores')->insert([
+        DB::table('herb_store')->insert([
             [
                 "store_id" => 1,
                 "herb_id" => 2
