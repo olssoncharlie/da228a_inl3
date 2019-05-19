@@ -13,10 +13,14 @@
   <body>
 
     @include('components.nav')
+    <div class="pt-4">
+    </div>
     <div class="container">  
         <!-- Content here -->
         
         @yield('content')
+    </div>
+    <div class="pt-4">
     </div>
     
 

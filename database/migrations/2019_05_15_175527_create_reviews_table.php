@@ -18,7 +18,7 @@ class CreateReviewsTable extends Migration
             $table->text('name');
             $table->text('comment');
             $table->unsignedBigInteger('herb_id')->nullable();
-            $table->foreign('herb_id')->references('id')->on('herbs');
+            $table->foreign('herb_id')->references('id')->on('herbs')->onDelete('cascade');
 
             $table->timestamps();
         });

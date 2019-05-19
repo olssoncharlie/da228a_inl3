@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Herb;
+use App\Store;
 
 class HerbsController extends Controller
 {
@@ -14,7 +15,10 @@ class HerbsController extends Controller
      */
     public function index()
     {
-        return view("herbs.index");
+        $herbs = Herb::all();
+        return view("herbs.index", [
+            "herbs" => $herbs
+        ]);
     }
 
     /**
@@ -24,7 +28,10 @@ class HerbsController extends Controller
      */
     public function create()
     {
-        return view("herbs.create");
+        $stores = Store::all();
+        return view("herbs.create", [
+            "stores" => $stores
+        ]);
     }
 
     /**
@@ -35,7 +42,21 @@ class HerbsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $herb = new Herb;
+        $herb->name = $request->input("name");
+        $herb->price = $request->input("price");
+        $herb->amount = $request->input("amount");
+        $herb->image = $request->input("image");
+        $herb->description = $request->input("description");
+
+        $herb->save();
+
+        foreach ($request->input("stores") as $value) {
+            $store = Store::find($value);
+            $herb->stores()->save($store);
+        }
+
+        return redirect()->route('herbs.show', ['id' => $herb->id]);
     }
 
     /**
@@ -46,7 +67,14 @@ class HerbsController extends Controller
      */
     public function show($id)
     {
-        return view("herbs.show");
+        $herb = Herb::find($id);
+        $stores = $herb->getStores();
+        $reviews = $herb->getReviews();
+        return view("herbs.show", [
+            "herb" => $herb,
+            "stores" => $stores,
+            "reviews" => $reviews
+        ]);
     }
 
     /**
@@ -57,7 +85,16 @@ class HerbsController extends Controller
      */
     public function edit($id)
     {
-        return view("herbs.edit");
+        $herb = Herb::find($id);
+        $stores = Store::all();
+        $herbStores = $herb->getStores();
+        $reviews = $herb->getReviews();
+        return view("herbs.edit", [
+            "herb" => $herb,
+            "herbStores" => $herbStores,
+            "reviews" => $reviews,
+            "stores" => $stores
+        ]);
     }
 
     /**
@@ -69,7 +106,21 @@ class HerbsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $herb = Herb::find($id);
+        $herb->name = $request->input("name");
+        $herb->price = $request->input("price");
+        $herb->amount = $request->input("amount");
+        $herb->image = $request->input("image");
+        $herb->description = $request->input("description");
+
+        $herb->save();
+
+        $stores = $request->input("stores");
+
+        // Syncar pivot-tabellen så den är aktuell med de stores man skickade in
+        $herb->stores()->sync($stores);
+
+        return redirect()->route('herbs.show', ['id' => $herb->id]);
     }
 
     /**
@@ -80,6 +131,9 @@ class HerbsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $herb = Herb::find($id);
+        $herb->delete();
+
+        return redirect()->route('herbs.index');
     }
 }
