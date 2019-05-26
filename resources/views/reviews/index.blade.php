@@ -2,6 +2,10 @@
 @section('title', 'Reviews')
 
 @section('content')
-    
-    <p>index.blade.php</p>
+
+<div class="row">
+    <div class="col-md-6">
+        @include('components.reviews')
+    </div>
+</div>
 @endsection

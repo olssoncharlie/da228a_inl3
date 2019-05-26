@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Review;
+use App\Herb;
 
 class ReviewsController extends Controller
 {
@@ -14,17 +15,24 @@ class ReviewsController extends Controller
      */
     public function index()
     {
-        return view("reviews.index");
+        $reviews = Review::all();
+        return view("reviews.index", [
+            "reviews" => $reviews
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view("reviews.create");
+        $herb_id = $request->query("id");
+        $herb = Herb::find($herb_id);
+        return view("reviews.create", [
+            "herb" => $herb
+        ]);
     }
 
     /**
@@ -35,7 +43,16 @@ class ReviewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $herb = Herb::find($request->input("herb_id"));
+        $review = new Review;
+        
+        $review->name = $request->input("name");
+        $review->comment = $request->input("comment");
+        $review->herb()->associate($herb);
+
+        $review->save();
+
+        return redirect()->route('herbs.show', ['id' => $herb->id]);
     }
 
     /**
@@ -46,7 +63,13 @@ class ReviewsController extends Controller
      */
     public function show($id)
     {
-        return view("reviews.show");
+        $review = Review::find($id);
+        $herb = $review->herb;
+        // dd($herb);
+        return view("reviews.show", [
+            "review" => $review,
+            "herb" => $herb
+        ]);
     }
 
     /**
@@ -57,7 +80,14 @@ class ReviewsController extends Controller
      */
     public function edit($id)
     {
-        return view("reviews.edit");
+        $review = Review::find($id);
+        $review_herb = $review->herb;
+        $herbs = Herb::all();
+        return view("reviews.edit", [
+            "review" => $review,
+            "review_herb" => $review_herb,
+            "herbs" => $herbs
+        ]);
     }
 
     /**
@@ -69,7 +99,14 @@ class ReviewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $review = Review::find($id);
+        $review->name = $request->input("name");
+        $review->comment = $request->input("comment");
+        $review->herb_id = $request->input("herb");
+
+        $review->save();
+
+        return redirect()->route('reviews.show', ['id' => $review->id]);
     }
 
     /**
@@ -80,6 +117,9 @@ class ReviewsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $review = Review::find($id);
+        $review->delete();
+
+        return redirect()->route('reviews.index');
     }
 }

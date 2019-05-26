@@ -43,6 +43,16 @@
             </div>
         </div>
     </div>
-    @include('components.reviews')
+    <div class="col-md-6">
+        @include('components.reviews')
+        @auth
+            // The user is authenticated...
+        @endauth
+
+        {{-- Lägg denna knappen i @auth sedan när det är på plats --}}
+        <div class="pt-4">
+        </div>
+        <a class="btn btn-success" href="{{ route('reviews.create', ['id' => $herb->id]) }}" role="button">Lägg till recension</a>
+    </div>
 </div>
 @endsection
