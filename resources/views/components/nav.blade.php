@@ -16,9 +16,19 @@
             </li>
         </ul>
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Logga in</a>
+            <li class="nav-item {{ Request::is('register*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('register') }}">Registrera</a>
             </li>
+            @if (Auth::check())
+                <form class="form-inline" action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="btn btn-light" type="submit">Logga Ut</button>
+                </form>
+            @else
+                <li class="nav-item">
+                    <a class="btn btn-light" href="{{ route('login') }}">Logga in</a>
+                </li>
+            @endif
         </ul>
     </div>
 </nav>

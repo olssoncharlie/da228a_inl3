@@ -15,13 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-# TESTAR FÖR ATT SE SÅ HEADER OCH FOOTER FUNGERAR
-Route::get('/test', function () {
-    return view('test', [
-        "title" => "TESTAR"
-    ]);
-});
-
 Route::resource('/herbs', 'HerbsController');
 Route::resource('/stores', 'StoresController');
 Route::resource('/reviews', 'ReviewsController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

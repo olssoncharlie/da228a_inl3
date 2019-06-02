@@ -4,18 +4,14 @@
 @section('content')
 
 @auth
-    // The user is authenticated...
-@endauth
-
-{{-- Lägg denna knappen i @auth sedan när det är på plats --}}
-<div class="row">
-    <div class="col-2">
-        <a class="btn btn-primary" href="{{ route('herbs.edit', ['id' => $herb->id]) }}" role="button">Ändra krydda</a>
+    <div class="row">
+        <div class="col-2">
+            <a class="btn btn-primary" href="{{ route('herbs.edit', ['id' => $herb->id]) }}" role="button">Ändra krydda</a>
+        </div>
     </div>
-</div>
-<div class="pt-4">
-</div>
-
+    <div class="pt-4">
+    </div>
+@endauth
 
 <div class="row">
     <div class="col-md-6">
@@ -47,13 +43,10 @@
         <h4>Recensioner</h4>
         @include('components.reviews')
         @auth
-            // The user is authenticated...
+            <div class="pt-4">
+            </div>
+            <a class="btn btn-success" href="{{ route('reviews.create', ['id' => $herb->id]) }}" role="button">Lägg till recension</a>
         @endauth
-
-        {{-- Lägg denna knappen i @auth sedan när det är på plats --}}
-        <div class="pt-4">
-        </div>
-        <a class="btn btn-success" href="{{ route('reviews.create', ['id' => $herb->id]) }}" role="button">Lägg till recension</a>
     </div>
 </div>
 @endsection

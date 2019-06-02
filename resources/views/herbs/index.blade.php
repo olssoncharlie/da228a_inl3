@@ -4,15 +4,12 @@
 @section('content')
 
 @auth
-    // The user is authenticated...
-@endauth
-
-{{-- Lägg denna knappen i @auth sedan när det är på plats --}}
-<div class="row">
-    <div class="col-12">
-        <a class="btn btn-success" href="{{ route('herbs.create') }}" role="button">Lägg till ny krydda</a>
+    <div class="row">
+        <div class="col-12">
+            <a class="btn btn-success" href="{{ route('herbs.create') }}" role="button">Lägg till ny krydda</a>
+        </div>
     </div>
-</div>
+@endauth
 
 <h1>Kryddor</h1>
 

@@ -4,20 +4,17 @@
 @section('content')
 
 @auth
-    // The user is authenticated...
+    <div class="row">
+        <div class="col-2">
+            <a class="btn btn-primary" href="{{ route('reviews.edit', ['id' => $review->id]) }}" role="button">Ändra recension</a>
+        </div>
+    </div>
+    <div class="pt-4">
+    </div>
 @endauth
 
-{{-- Lägg denna knappen i @auth sedan när det är på plats --}}
 <div class="row">
-    <div class="col-2">
-        <a class="btn btn-primary" href="{{ route('reviews.edit', ['id' => $review->id]) }}" role="button">Ändra recension</a>
-    </div>
-</div>
-<div class="pt-4">
-</div>
-
-<div class="row">
-    <div class="col-6">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header">
                 <h2 class="">{{ $review->name }}</h2>
