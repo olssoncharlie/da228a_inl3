@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 Use App\Store;
+Use App\Herb;
 
 class StoresController extends Controller
 {
@@ -14,7 +15,10 @@ class StoresController extends Controller
      */
     public function index()
     {
-        return view("stores.index");
+        $stores = Store::all();
+        return view("stores.index", [
+            "stores" => $stores
+        ]);
     }
 
     /**
@@ -24,7 +28,10 @@ class StoresController extends Controller
      */
     public function create()
     {
-        return view("stores.create");
+        $herbs = Herb::all();
+        return view("stores.create", [
+            "herbs" => $herbs
+        ]);
     }
 
     /**
@@ -35,7 +42,16 @@ class StoresController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $store = new Store;
+        $store->name = $request->input("name");
+        $store->address = $request->input("address");
+        $store->save();
+
+        $herbs = $request->input("herbs");
+        // Syncar pivot-tabellen så den är aktuell med de herbs man skickade in
+        $store->herbs()->sync($herbs);
+
+        return redirect()->route('stores.show', ['id' => $store->id]);
     }
 
     /**
@@ -46,7 +62,11 @@ class StoresController extends Controller
      */
     public function show($id)
     {
-        return view("stores.show");
+        $store = Store::find($id);
+        $herbs = $store->herbs;
+        return view("stores.show", [
+            "store" => $store
+        ]);
     }
 
     /**
@@ -57,7 +77,12 @@ class StoresController extends Controller
      */
     public function edit($id)
     {
-        return view("stores.edit");
+        $store = Store::find($id);
+        $herbs = Herb::all();
+        return view("stores.edit", [
+            "store" => $store,
+            "herbs" => $herbs
+        ]);
     }
 
     /**
@@ -69,7 +94,16 @@ class StoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $store = Store::find($id);
+        $store->name = $request->input("name");
+        $store->address = $request->input("address");
+        $store->save();
+
+        $herbs = $request->input("herbs");
+        // Syncar pivot-tabellen så den är aktuell med de stores man skickade in
+        $store->herbs()->sync($herbs);
+
+        return redirect()->route('stores.show', ['id' => $store->id]);
     }
 
     /**
@@ -80,6 +114,8 @@ class StoresController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Store::destroy($id);
+
+        return redirect()->route('stores.index');
     }
 }
