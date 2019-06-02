@@ -13,17 +13,17 @@ class ReviewsTableSeed extends Seeder
     {
         DB::table('reviews')->insert([
             [
-                "name" => "Taco-lover 84",
+                "user_id" => 1,
                 "comment" => "ÄLSKAR TACO, FANTASTISK KRYDDA!!",
                 "herb_id" => 4,
             ],
             [
-                "name" => "Göran",
+                "user_id" => 2,
                 "comment" => "Inget fan av stark mat",
                 "herb_id" => 3,
             ],
             [
-                "name" => "Leonardo",
+                "user_id" => 3,
                 "comment" => "Bravissimo",
                 "herb_id" => 1,
             ],

@@ -12,7 +12,8 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="name">Username</label>
-                        <input required type="text" class="form-control" id="name" name="name" placeholder="Username">
+                        <input disabled required type="text" class="form-control" id="name" name="name" value="{{ $user->name }}">
+                        <input hidden required class="form-control" id="user_id" name="user_id" value="{{ $user->id }}">
                     </div>
                 </div>
             </div>

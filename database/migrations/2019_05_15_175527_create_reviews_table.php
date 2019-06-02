@@ -15,7 +15,8 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('name');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('comment');
             $table->unsignedBigInteger('herb_id')->nullable();
             $table->foreign('herb_id')->references('id')->on('herbs')->onDelete('cascade');

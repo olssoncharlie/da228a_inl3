@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'REVIEW-TITEL HÄR SENARE')
+@section('title', 'Recension')
 
 @section('content')
 
@@ -17,7 +17,7 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h2 class="">{{ $review->name }}</h2>
+                <h2 class="">{{ $review->user->name }}</h2>
             </div>
             <div class="card-body">
                 <p class="card-text">{{ $review->comment }}</p>

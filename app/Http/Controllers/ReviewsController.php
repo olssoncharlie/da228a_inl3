@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Review;
 use App\Herb;
 
@@ -32,10 +33,12 @@ class ReviewsController extends Controller
      */
     public function create(Request $request)
     {
+        $user = Auth::user();
         $herb_id = $request->query("id");
         $herb = Herb::find($herb_id);
         return view("reviews.create", [
-            "herb" => $herb
+            "herb" => $herb,
+            "user" => $user
         ]);
     }
 
@@ -50,7 +53,7 @@ class ReviewsController extends Controller
         $herb = Herb::find($request->input("herb_id"));
         $review = new Review;
         
-        $review->name = $request->input("name");
+        $review->user_id = $request->input("user_id");
         $review->comment = $request->input("comment");
         $review->herb()->associate($herb);
 
@@ -104,7 +107,7 @@ class ReviewsController extends Controller
     public function update(Request $request, $id)
     {
         $review = Review::find($id);
-        $review->name = $request->input("name");
+        $review->user_id = $request->input("user_id");
         $review->comment = $request->input("comment");
         $review->herb_id = $request->input("herb");
 
