@@ -44,6 +44,7 @@
         </div>
     </div>
     <div class="col-md-6">
+        <h4>Recensioner</h4>
         @include('components.reviews')
         @auth
             // The user is authenticated...
