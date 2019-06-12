@@ -1,0 +1,5 @@
+1) Delar av våra controllers har vi använt variabler som varit onödiga och gör koden mer svårläst.
+Exempel på detta är på rad 92 i vår reviewController "$review_herb = $review->herb;". Denna delen hade man kunnat ta bort och direkt arbetat med objektet för att slippa en onödig variabeldeklaration eftersom namnet på variablern ändå är i princip den samma som vad det hade varit att gå in i objektet.
+
+2) I våra tester hade vi kunnat nästa våra pilar mer. (osäker på vad det officiella namnet för detta är).
+Exempelvis i vårt test "testEditWhenNotLoggedIn" så hade vi kunnat sätta alla pilar efter varandra istället för att hela tiden använda $response. Detta hade ökat läsbarheten och gjort koden mer standardiserad jämfört med hur resten är skriven.
